@@ -10,7 +10,8 @@ import MobileViewPage from "./components/MobileView";
 import PageFooter from "./components/PageFooter";
 import PageHeader from "./components/PageHeader";
 import VisionWrapper from "./components/VisionWrapper";
-import WelcomeMessage from "./components/WelcomeMessage";
+import Webcam from "react-webcam";
+import {useRef} from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -27,6 +28,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function App() {
+
+    const webcamRef = useRef(null);
+    const canvasRef = useRef(null);
+
+
+
   const classes = useStyles();
   return (
     <>
@@ -37,7 +44,32 @@ function App() {
           </Grid>
           <Grid spacing={1} className={classes.content} item container xs={12}>
             <Grid item xs={12}>
-              <WelcomeMessage />
+            <Webcam 
+                ref={webcamRef}
+                style={{
+                    position: "absolute",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    left: 0,
+                    right: 0,
+                    textAlign: "center",
+                    width: 640,
+                    height: 480,
+                }}
+            />
+
+            <canvas ref={canvasRef}
+                style={{
+                    position: "absolute",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    left: 0,
+                    right: 0,
+                    textAlign: "center",
+                    width: 640,
+                    height: 480,
+            }}
+            />
             </Grid>
             <Grid item xs={12}>
               <VisionWrapper />
