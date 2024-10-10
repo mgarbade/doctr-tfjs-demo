@@ -30,6 +30,7 @@ import HeatMap from "./HeatMap";
 import ImageViewer from "./ImageViewer";
 import Sidebar from "./Sidebar";
 import WordsList from "./WordsList";
+import WebcamViewer from './WebcamViewer'; 
 
 const COMPONENT_ID = "VisionWrapper";
 
@@ -39,6 +40,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function VisionWrapper(): JSX.Element {
   const classes = useStyles();
+  const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
   const [detConfig, setDetConfig] = useState(DET_CONFIG.db_mobilenet_v2);
   const [recoConfig, setRecoConfig] = useState(RECO_CONFIG.crnn_vgg16_bn);
   const [loadingImage, setLoadingImage] = useState(false);
@@ -191,7 +194,7 @@ export default function VisionWrapper(): JSX.Element {
       container
     >
       <Portal container={uploadContainer}>
-        <ImageViewer loadingImage={loadingImage} onUpload={onUpload} />
+        <WebcamViewer webcamRef={webcamRef} canvasRef={canvasRef} />
       </Portal>
       <HeatMap heatMapContainerRef={heatMapContainerObject} />
       <Grid item xs={12} md={3}>
